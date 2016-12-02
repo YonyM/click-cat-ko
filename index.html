@@ -4,27 +4,37 @@
     <meta charset="UTF-8">
     <title>Cat Clicker</title>
 </head>
+
 <body>
-    <ul id="cat-list"></ul>
-    <div id="cat">
+
+    <ul id="cat-list" data-bind = "foreach: catList">
+        <li>
+            <!--<span data-bind = "text:$index"> </span> -->
+            <span data-bind = "text: name, click: $parent.setCat"> </span> 
+        </li>
+    </ul> 
+
+    <div id="cat" data-bind = "with: currentCat"> 
 
         <h2 data-bind = "text: name"></h2>
-        <h2 data-bind = "text: level"></h2>
+        <h4 data-bind = "text: level"></h4>
         <div data-bind = "text: clickCount"></div>
-        <img data-bind = "attr: {src:imgSrc}, click: incrementClick" src="" alt="cute cat">
+        <img data-bind = "attr: {src:imgSrc}, click:$parent.incrementCounter" src="" alt="cute cat">
 
-        <ul data-bind = "foreach: nickNames">
-            <li>
-                Position <span data-bind = "text: $index"></span>:
-                <span data-bind = "text: nickName"> </span> 
-                <a href="#" data-bind="click: $parent.removeNickname" >Remove</a>
-            </li>
-        </ul>
-
-
-
+        <div>
+            <h3>Nicknames: </h3>
+            <ul data-bind = "foreach: nickNames">
+                <li>
+                    <span data-bind = "text:$index"> </span>
+                    <span data-bind = "text:$data"> </span> 
+                </li>
+            </ul>
+        </div>
     </div>
+
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/app.js"></script>
+
 </body>
+
 </html>
